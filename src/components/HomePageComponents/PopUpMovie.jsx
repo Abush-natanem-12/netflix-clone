@@ -1,7 +1,7 @@
 import { ChevronRight, X } from "lucide-react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { togglePopup } from "../../features/slices/MoviePopUpSlice";
 
 function PopUpMovie() {

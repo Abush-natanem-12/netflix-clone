@@ -1,3 +1,4 @@
+import Footer from "../components/Footer";
 import Faqs from "../components/HomePageComponents/Faqs";
 import { Hero } from "../components/HomePageComponents/Hero";
 import PopUpMovie from "../components/HomePageComponents/PopUpMovie";
@@ -14,6 +15,7 @@ const Home = function () {
         <Faqs />
       </div>
       <PopUpMovie />
+      <Footer dark={true} />
     </div>
   );
 };

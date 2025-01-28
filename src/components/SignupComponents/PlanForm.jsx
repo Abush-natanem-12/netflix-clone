@@ -7,12 +7,7 @@ import { setPlan } from "../../features/slices/accountSlices";
 
 function PlanFormComponent() {
   const dispatch = useDispatch();
-  const [activeSmallPlan, setActiveSmallPlan] = useState(4);
   const [activeLargePlan, setActiveLargePlan] = useState(4);
-
-  const handleActiveSmallSizePlan = function (id) {
-    setActiveSmallPlan(id);
-  };
 
   const handleActiveLargeSizePlan = function (id, plan) {
     setActiveLargePlan(id);
@@ -31,6 +26,28 @@ function PlanFormComponent() {
 
       <div className="w-full sm:w-[95%] md:w-[90%] xl:w-full">
         <div className="w-full xl:hidden">
+          <div className="w-full flex justify-between items-center">
+            {plans.map((el) => {
+              return (
+                <SmallSizePlan
+                  key={el.id}
+                  title={el.planTitle}
+                  quality={el.quality}
+                  monhlyPrice={el.monhlyPrice}
+                  sound={el.sound}
+                  resolution={el.resolution}
+                  supportedDevices={el.supportedDevices}
+                  household={el.household}
+                  download={el.download}
+                  id={el.id}
+                  active={activeLargePlan}
+                  onHandleLarge={handleActiveLargeSizePlan}
+                  first={true}
+                />
+              );
+            })}
+          </div>
+
           {plans.map((el) => {
             return (
               <SmallSizePlan
@@ -44,6 +61,9 @@ function PlanFormComponent() {
                 household={el.household}
                 download={el.download}
                 id={el.id}
+                active={activeLargePlan}
+                onHandleLarge={handleActiveLargeSizePlan}
+                first={false}
               />
             );
           })}
@@ -106,12 +126,9 @@ const LargeSizePlan = function (props) {
     onHandleLarge,
   } = props;
 
-  console.log(props);
-  console.log(quality);
-
   return (
     <div
-      className={`w-[23%] flex flex-col rounded-2xl p-2 border-[1px] cursor-pointer border-[rgba(0,0,0,.7)] ${
+      className={`w-[100%] flex flex-col rounded-2xl p-2 border-[1px] cursor-pointer border-[rgba(0,0,0,.7)] ${
         id === active &&
         "shadow-lg shadow-indigo-500 border-2 bg-gray-50 scale-[1.01]"
       }`}
@@ -195,9 +212,104 @@ const LargeSizePlan = function (props) {
 };
 
 const SmallSizePlan = function (props) {
+  const {
+    id,
+    title,
+    quality,
+    monhlyPrice,
+    sound,
+    resolution,
+    supportedDevices,
+    household,
+    download,
+    active,
+    onHandleLarge,
+    first,
+  } = props;
+
   return (
     <div className="flex flex-col">
-      <div className="w-full flex"></div>
+      {first ? (
+        <div
+          className="w-full flex justify-between items-center"
+          onClick={() => onHandleLarge(id, title)}
+        >
+          <div
+            className={`w-[100%] flex flex-col bg-blue px-4 pt-4 pb-6 rounded-2xl  items-start gap-2 bg-linear-to-bl ${
+              id === 1 && "from-[#214e9c] to-[#2665d0]"
+            } ${id === 2 && "from-[#214e9c] to-[#633bd6]"} ${
+              id === 3 && "from-[#214e9c] to-[#a039d4]"
+            } ${id === 4 && "from-[#214e9c] to-[#c5132c]"}`}
+          >
+            <span className="text-white tracking-[1px] font-bold text-base md:text-xl">
+              {title}
+            </span>
+            <span className="tracking-[1px] font text-xs md:text-base text-white">
+              {quality}
+            </span>
+          </div>
+        </div>
+      ) : (
+        <>
+          {active === id && (
+            <div className="w-full flex flex-col items-center">
+              <div className="w-full flex flex-col px-4 pt-4 pb-6   items-start gap-2 border-b-[1px] border-b-gray-400">
+                <span className="text-gray-600 tracking-[1px] font-bold text-sm md:text-xs">
+                  monthly price
+                </span>
+                <span className="text-gray-800 tracking-[1px] font-bold text-xs md:text-base">
+                  {monhlyPrice}
+                </span>
+              </div>
+
+              <div className="w-full flex flex-col px-4 pt-4 pb-6   items-start gap-2 border-b-[1px] border-b-gray-400">
+                <span className="text-gray-600 tracking-[1px] font-bold text-sm md:text-xs">
+                  Video and Sound Quality
+                </span>
+                <span className="text-gray-800 tracking-[1px] font-bold text-xs md:text-base">
+                  {sound}
+                </span>
+              </div>
+
+              <div className="w-full flex flex-col px-4 pt-4 pb-6   items-start gap-2 border-b-[1px] border-b-gray-400">
+                <span className="text-gray-600 tracking-[1px] font-bold text-sm md:text-xs">
+                  Resolution
+                </span>
+                <span className="text-gray-800 tracking-[1px] font-bold text-xs md:text-base">
+                  {resolution}
+                </span>
+              </div>
+
+              <div className="w-full flex flex-col px-4 pt-4 pb-6   items-start gap-2 border-b-[1px] border-b-gray-400">
+                <span className="text-gray-600 tracking-[1px] font-bold text-sm md:text-xs">
+                  Supported Devices
+                </span>
+                <span className="text-gray-800 tracking-[1px] font-bold text-xs md:text-base">
+                  {supportedDevices}
+                </span>
+              </div>
+
+              <div className="w-full flex flex-col px-4 pt-4 pb-6   items-start gap-2 border-b-[1px] border-b-gray-400">
+                <span className="text-gray-600 tracking-[1px] font-bold text-sm md:text-xs">
+                  Devices your household can watch at same time
+                </span>
+                <span className="text-gray-800 tracking-[1px] font-bold text-xs md:text-base">
+                  {household}
+                </span>
+              </div>
+
+              <div className="w-full flex flex-col px-4 pt-4 pb-6   items-start gap-2 border-b-[1px] border-b-gray-400">
+                <span className="text-gray-600 tracking-[1px] font-bold text-sm md:text-xs">
+                  Download Devices
+                </span>
+                <span className="text-gray-800 tracking-[1px] font-bold text-xs md:text-base">
+                  {download}
+                </span>
+              </div>
+            </div>
+          )}
+        </>
+      )}
     </div>
   );
 };

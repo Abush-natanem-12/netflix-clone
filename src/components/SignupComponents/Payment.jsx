@@ -1,7 +1,6 @@
-import { CreditCard, HelpCircle } from "lucide-react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ValidInputs from "../validInputs";
 
 function PaymentComponent() {
@@ -10,18 +9,18 @@ function PaymentComponent() {
   const [expiryDate, setExpiryDate] = useState("");
   const [cvv, setCvv] = useState("");
   const [cardName, setCardName] = useState("");
-  const [checked, setChecked] = useState(false);
 
   const [validCardNumber, setValidCardNumber] = useState(true);
   const [validExpiryDate, setValidExpiryDate] = useState(true);
   const [validCvv, setValidCvv] = useState(true);
   const [validCardName, setValidCardName] = useState(true);
-  const [validCheck, setValidCheck] = useState(true);
+
+  const redirect = useNavigate();
 
   const handlePayment = function (e) {
     e.preventDefault();
     if (cardNumber.length !== 10) {
-      setValidCardName(false);
+      setValidCardNumber(false);
     }
 
     if (expiryDate.length !== 4) {
@@ -40,13 +39,13 @@ function PaymentComponent() {
       return;
     }
 
-    alert("good job boy");
+    redirect("/");
   };
 
   // now for validity of email
 
   return (
-    <div className="w-[90%] sm:w-[50%] md:w-[30%] lg:w-[25%] flex flex-col items-center h-[70vh] justify-center gap-5">
+    <div className="w-[90%] sm:w-[50%] md:w-[30%] lg:w-[25%] flex flex-col items-center justify-center gap-5">
       <span className="text-base text-gray-900 tracking-[1px] uppercase ">
         step 2 of 2
       </span>
@@ -91,7 +90,6 @@ function PaymentComponent() {
             className="w-full h-12 bg-transparent outline-none border-[1px] border-gray-600 px-4"
           />
           {!validCvv && <ValidInputs message={"Invalid Card Number"} />}
-          <HelpCircle className="size-7 font-thin text-gray-600 absolute top-[50%] right-4 -translate-y-[50%]" />
         </div>
 
         <div className="w-full relative ">
