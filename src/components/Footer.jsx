@@ -1,5 +1,6 @@
 import { footerLink } from "../constants";
 
+// eslint-disable-next-line react/prop-types
 function Footer({ dark }) {
   return (
     <footer
