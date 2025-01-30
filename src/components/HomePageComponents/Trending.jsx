@@ -20,7 +20,7 @@ function Trending() {
       <h2 className="text-2xl lg:text-3xl font-bold tracking-[1px] text-white">
         Trending Movies
       </h2>
-      <div className="w-full flex gap-7 items-center overflow-auto ">
+      <div className="w-full flex gap-4 items-center overflow-auto ">
         {trendingMovies.map((el) => {
           return (
             <div
@@ -28,7 +28,7 @@ function Trending() {
                 handleOpenPopUp(el.title, el.description, el.imageUrl)
               }
               key={el.id}
-              className="w-[20%] shrink-0 cursor-pointer hover:scale-[1.1] duration-200 relative rounded-lg"
+              className="w-[30%] shrink-0 cursor-pointer hover:scale-[1.1] duration-200 relative rounded-lg"
             >
               <span className="text-4xl md:text-6xl lg:text-7xl 2xl:text-8xl absolute top-[50%] left-0 -translate-y-[50%] font-extrabold -translate-x-[50%] text-black stroke-2 stroke-white ">
                 {el.id}

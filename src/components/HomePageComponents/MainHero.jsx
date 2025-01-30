@@ -25,7 +25,7 @@ function MainHero() {
   };
 
   return (
-    <div className="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] w-[70%] md:w-[60%] lg:w-[50%] 2xl:w-[40%] flex flex-col gap-4 items-center text-center">
+    <div className="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] w-[85%] md:w-[60%] lg:w-[50%] 2xl:w-[40%] flex flex-col gap-4 items-center text-center">
       <h1 className="text-white font-extrabold tracking-[1px] text-4xl lg:text-5xl 2xl:text-6xl">
         Unlimited movies, TV shows, and more
       </h1>
@@ -48,7 +48,7 @@ function MainHero() {
           >
             <input
               value={email}
-              placeholder="Enter Emaeil"
+              placeholder="Enter Email"
               onChange={(e) => setEm(e.target.value)}
               type="email"
               className="w-full h-full bg-[rgba(0,0,0,.3)] border-[1px] border-red-600 rounded-xs px-4  text-white outline-none"
